@@ -1,0 +1,16 @@
+.App {
+  text-align: center;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+input {
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+button {
+  margin-top: 20px;
+  text-align: center;
+  margin-right: 5px;
+}
