@@ -1,24 +1,25 @@
 import "./App.css";
-import Login from "./Login";
-import { useState } from "react";
-import Signup from "./Signup";
-import firebase from "./firebase";
-import Home from "./Home";
-import ForgotPassword from "./ForgotPassword";
-import Conformemail from "./Conformemail";
+import Login from "./Components/Login";
+import { useState, useEffect } from "react";
+import Signup from "./Components/Signup";
+import firebase from "./Components/firebase";
+import Home from "./Components/Home";
+import ForgotPassword from "./Components/ForgotPassword";
+import Conformemail from "./Components/Conformemail";
 import "firebase/auth";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   const [User, setUser] = useState("");
-
   function CheckStatus() {
-    var authRef = firebase.auth();
-    authRef.onAuthStateChanged(function (user) {
-      if (user) {
-        setUser(user);
-      }
-    });
+    useEffect(() => {
+      var authRef = firebase.auth();
+      authRef.onAuthStateChanged(function (user) {
+        if (user) {
+          setUser(user);
+        }
+      });
+    }, []);
   }
 
   return (

@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 
-function Conformemail({ onRouteChange }) {
+function Conformemail() {
   let history = useHistory();
   return (
     <div>

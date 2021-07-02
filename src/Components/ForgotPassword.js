@@ -13,7 +13,7 @@ function ForgotPassword() {
         history.push("/Conformemail");
       })
       .catch((error) => {
-        alert("errorr");
+        alert("error");
       });
   };
 
@@ -27,14 +27,6 @@ function ForgotPassword() {
         name="email"
       ></input>
       <button onClick={passwordReset}>Send</button>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          history.push("/");
-        }}
-      >
-        Login
-      </button>
     </div>
   );
 }

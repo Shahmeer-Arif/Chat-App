@@ -2,7 +2,7 @@ import firebase from "./firebase";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Login({ onRouteChange }) {
+function Login() {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +37,6 @@ function Login({ onRouteChange }) {
         <input
           onChange={(e) => setPassword(e.target.value)}
           type="password"
-          id="password"
           name="password"
         ></input>
         <br></br>

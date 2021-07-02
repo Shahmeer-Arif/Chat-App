@@ -1,17 +1,16 @@
-import "./App.css";
+import "../App.css";
 import { useState } from "react";
 import firebase from "./firebase";
 import "firebase/auth";
 import { useHistory } from "react-router-dom";
 
-function Signup({ onRouteChange }) {
+function Signup() {
   let history = useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
   const handleSubmit = () => {
-    console.log(email, password);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -25,6 +24,10 @@ function Signup({ onRouteChange }) {
         console.log(e);
         alert("Error Occured or user not created");
       });
+
+    setEmail("");
+    setPassword("");
+    setUsername("");
   };
 
   return (
@@ -39,6 +42,7 @@ function Signup({ onRouteChange }) {
         <label> Email:</label>
         <input
           onChange={(e) => setEmail(e.target.value)}
+          value={email}
           type="email"
           name="email"
         ></input>
@@ -46,6 +50,7 @@ function Signup({ onRouteChange }) {
         <label> Name:</label>
         <input
           onChange={(e) => setUsername(e.target.value)}
+          value={username}
           type="text"
           name="name"
         ></input>
@@ -54,6 +59,7 @@ function Signup({ onRouteChange }) {
         <label>Password:</label>
         <input
           onChange={(e) => setPassword(e.target.value)}
+          value={password}
           type="password"
           name="password"
         ></input>
