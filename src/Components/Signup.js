@@ -1,34 +1,14 @@
 import "../App.css";
 import { useState } from "react";
-import firebase from "./firebase";
 import "firebase/auth";
 import { useHistory } from "react-router-dom";
+import { handleSubmit } from "../Functions/functions";
 
 function Signup() {
   let history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
-
-  const handleSubmit = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        alert("User Created");
-        authUser.user.updateProfile({
-          displayName: username,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-        alert("Error Occured or user not created");
-      });
-
-    setEmail("");
-    setPassword("");
-    setUsername("");
-  };
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
+  const [Username, setUsername] = useState("");
 
   return (
     <div className="App">
@@ -36,13 +16,17 @@ function Signup() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit();
+          handleSubmit(
+            { Email, setEmail },
+            { Password, setPassword },
+            { Username, setUsername }
+          );
         }}
       >
         <label> Email:</label>
         <input
           onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          value={Email}
           type="email"
           name="email"
         ></input>
@@ -50,7 +34,7 @@ function Signup() {
         <label> Name:</label>
         <input
           onChange={(e) => setUsername(e.target.value)}
-          value={username}
+          value={Username}
           type="text"
           name="name"
         ></input>
@@ -59,7 +43,7 @@ function Signup() {
         <label>Password:</label>
         <input
           onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          value={Password}
           type="password"
           name="password"
         ></input>

@@ -1,22 +1,10 @@
 import { useState } from "react";
-import firebase from "firebase";
 import { useHistory } from "react-router-dom";
+import { passwordReset } from "../Functions/functions";
 
 function ForgotPassword() {
   let history = useHistory();
   const [email, setEmail] = useState("");
-  const passwordReset = () => {
-    firebase
-      .auth()
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        history.push("/Conformemail");
-      })
-      .catch((error) => {
-        alert("error");
-      });
-  };
-
   return (
     <div>
       <h1>Enter your Email</h1>
@@ -26,7 +14,7 @@ function ForgotPassword() {
         type="email"
         name="email"
       ></input>
-      <button onClick={passwordReset}>Send</button>
+      <button onClick={passwordReset({ email }, history)}>Send</button>
     </div>
   );
 }
