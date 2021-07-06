@@ -1,31 +1,21 @@
-import firebase from "./firebase";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { handleSubmitLogin } from "../Functions/functions";
 
 function Login() {
+  const [password, setPassword] = useState("");
   let history = useHistory();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  // firebase
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(email, password);
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        alert("Login success");
-        history.push("/Home");
-      })
-      .catch((error) => {
-        alert("No user exist | ", error);
-      });
-  };
 
   return (
     <div className="Login">
       <h1>Log in Form</h1>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmitLogin({ email, password }, history);
+        }}
+      >
         <label> Email:</label>
         <input
           onChange={(e) => setEmail(e.target.value)}
@@ -51,8 +41,7 @@ function Login() {
           SignUp
         </button>
         <button
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             history.push("/ForgotPassword");
           }}
         >
