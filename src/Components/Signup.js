@@ -1,8 +1,11 @@
 import "../App.css";
 import { useState } from "react";
-import firebase from "./firebase";
 import "firebase/auth";
+import firebase from "./firebase";
 import { useHistory } from "react-router-dom";
+import { signup } from "../Utils/index";
+
+var db = firebase.firestore();
 
 function Signup() {
   let history = useHistory();
@@ -10,25 +13,25 @@ function Signup() {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const handleSubmit = () => {
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((authUser) => {
-        alert("User Created");
-        authUser.user.updateProfile({
-          displayName: username,
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-        alert("Error Occured or user not created");
-      });
+  // const handleSubmit = () => {
+  //   firebase
+  //     .auth()
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then((authUser) => {
+  //       alert("User Created");
+  //       authUser.user.updateProfile({
+  //         displayName: username,
+  //       });
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //       alert("Error Occured or user not created");
+  //     });
 
-    setEmail("");
-    setPassword("");
-    setUsername("");
-  };
+  //   setEmail("");
+  //   setPassword("");
+  //   setUsername("");
+  // };
 
   return (
     <div className="App">
@@ -36,7 +39,10 @@ function Signup() {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit();
+          signup({ email, password, username, db });
+          setEmail("");
+          setPassword("");
+          setUsername("");
         }}
       >
         <label> Email:</label>
@@ -45,7 +51,7 @@ function Signup() {
           value={email}
           type="email"
           name="email"
-        ></input>
+        />
         <br></br>
         <label> Name:</label>
         <input
@@ -53,7 +59,7 @@ function Signup() {
           value={username}
           type="text"
           name="name"
-        ></input>
+        />
         <br></br>
 
         <label>Password:</label>
@@ -62,7 +68,7 @@ function Signup() {
           value={password}
           type="password"
           name="password"
-        ></input>
+        />
         <br></br>
         <button
           onClick={(e) => {

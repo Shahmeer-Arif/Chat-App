@@ -1,9 +1,9 @@
 import Messages from "./Messages";
 
-function Home({ User, CheckStatus }) {
+function Home({ User, checkuser }) {
+  checkuser();
   return (
     <div>
-      {CheckStatus()}
       <Messages User={User} />
     </div>
   );

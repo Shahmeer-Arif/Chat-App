@@ -1,25 +1,24 @@
 import "./App.css";
 import Login from "./Components/Login";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Signup from "./Components/Signup";
 import firebase from "./Components/firebase";
 import Home from "./Components/Home";
 import ForgotPassword from "./Components/ForgotPassword";
 import Conformemail from "./Components/Conformemail";
+import Options from "./Components/Options";
 import "firebase/auth";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   const [User, setUser] = useState("");
-  function CheckStatus() {
-    useEffect(() => {
-      var authRef = firebase.auth();
-      authRef.onAuthStateChanged(function (user) {
-        if (user) {
-          setUser(user);
-        }
-      });
-    }, []);
+  function checkuser() {
+    var authRef = firebase.auth();
+    authRef.onAuthStateChanged(function (user) {
+      if (user) {
+        setUser(user);
+      }
+    });
   }
 
   return (
@@ -36,10 +35,13 @@ function App() {
             <ForgotPassword />
           </Route>
           <Route path="/Home">
-            <Home CheckStatus={CheckStatus} User={User}></Home>
+            <Home checkuser={checkuser} User={User}></Home>
           </Route>
           <Route path="/Conformemail">
             <Conformemail />
+          </Route>
+          <Route path="/Options">
+            <Options />
           </Route>
         </Switch>
       </Router>
