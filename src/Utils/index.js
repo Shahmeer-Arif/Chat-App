@@ -1,4 +1,5 @@
 import firebase from "../Components/firebase";
+import "firebase/auth";
 
 export const login = ({ email, password }, history) =>
   new Promise((resolve, reject) => {

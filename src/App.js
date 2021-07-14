@@ -7,17 +7,20 @@ import Home from "./Components/Home";
 import ForgotPassword from "./Components/ForgotPassword";
 import Conformemail from "./Components/Conformemail";
 import Options from "./Components/Options";
+import Channels from "./Components/Channels";
 import "firebase/auth";
+import Sidebar from "./Components/Sidebar";
+import Chat from "./Components/Chat";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
-  const [User, setUser] = useState("");
+  const [User, setUser] = useState(null);
   function checkuser() {
     var authRef = firebase.auth();
-    authRef.onAuthStateChanged(function (user) {
-      if (user) {
-        setUser(user);
-      }
+    authRef.onAuthStateChanged(function () {
+      const user = firebase.auth().currentUser;
+      setUser(user);
     });
   }
 
@@ -42,6 +45,16 @@ function App() {
           </Route>
           <Route path="/Options">
             <Options />
+          </Route>
+          <Route path="/Channels">
+            <Channels User={User} />
+          </Route>
+          <Sidebar />
+          <Route path="/rooms/:roomId">
+            <Chat User={User} />
+          </Route>
+          <Route path="/Chat">
+            <Chat User={User} />
           </Route>
         </Switch>
       </Router>

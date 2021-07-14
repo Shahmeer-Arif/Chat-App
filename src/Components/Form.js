@@ -15,10 +15,18 @@ function Form({ messageSend, setInput, input }) {
       <button
         onClick={(e) => {
           e.preventDefault();
-          history.push("/");
+          history.push("/Login");
         }}
       >
         Logout
+      </button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          history.push("/Options");
+        }}
+      >
+        Options
       </button>
     </form>
   );

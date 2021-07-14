@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { signup } from "../Utils/index";
 
 var db = firebase.firestore();
-
 function Signup() {
   let history = useHistory();
   const [email, setEmail] = useState("");

@@ -9,7 +9,7 @@ function Options() {
   };
 
   const Channels = () => {
-    history.push("./Channel");
+    history.push("./Channels");
   };
   return (
     <div>
